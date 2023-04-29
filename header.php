@@ -2,6 +2,7 @@
 <html <?php language_attributes(); ?>>
 	<head>
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="profile" href="http://gmpg.org/xfn/11" />
