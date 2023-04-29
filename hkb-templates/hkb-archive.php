@@ -33,18 +33,11 @@
 
 					<div class="hkb-category <?php echo esc_attr( ht_kbarchive_catstyle( $hkb_current_term_id ) ); ?> <?php echo esc_attr( $hkb_current_term_class ); ?>">
 
-					<?php if ( get_theme_mod( 'ht_setting__kbarchivecatarticles', '0' ) != true ) : ?>
-					<a class="hkb-category__link" href="<?php echo esc_attr( get_term_link( $tax_term, 'ht_kb_category' ) ); ?>">
-					<?php endif; ?>
-
 						<?php if ( hkb_has_category_custom_icon( $hkb_current_term_id ) == 'true' ) : ?>
 							<div class="hkb-category__iconwrap"><?php hkb_category_thumb_img( $hkb_current_term_id ); ?></div>
 						<?php endif; ?>
 
 						<div class="hkb-category__content">
-							<?php if ( get_theme_mod( 'ht_setting__kbarchivecatarticles', '0' ) == true ) : ?>
-								<a class="hkb-category__headerlink" href="<?php echo esc_attr( get_term_link( $tax_term, 'ht_kb_category' ) ); ?>">
-							<?php endif; ?>
 
 							<h2 class="hkb-category__title">
 								<?php echo esc_html( $tax_term->name ); ?>
@@ -54,15 +47,18 @@
 								<div class="hkb-category__description"><?php echo esc_html( $tax_term->description ); ?></div>
 							<?php endif; ?>
 
-							<?php if ( get_theme_mod( 'ht_setting__kbarchivecatarticles', '0' ) == true ) : ?>
-								</a>
-							<?php endif; ?>
-
 							<?php
 							if ( get_theme_mod( 'ht_setting__kbarchivecatarticles', '0' ) == true ) :
 								$cat_posts = hkb_get_archive_articles( $tax_term, null, null, 'kb_home' );
 								?>
 								<?php if ( ! empty( $cat_posts ) && ! is_a( $cat_posts, 'WP_Error' ) ) : ?>
+									<?php
+										$totalArticles = count( $cat_posts );
+										$totalArticles .= ' ';
+										$totalArticles .= $totalArticles > 1 ? __( 'articles', 'knowall' ) : __( 'article', 'knowall' );
+									?>
+
+									<div class="hkb-category__articlecount"><?php echo $totalArticles; ?></div>
 
 									<ul class="hkb-category__articlelist">
 										<?php foreach ( $cat_posts as $cat_post ) : ?>                            
@@ -72,7 +68,7 @@
 										<?php endforeach; ?>
 									</ul>
 									<?php if ( get_theme_mod( 'ht_setting__kbarchivecatarticles_viewall', '0' ) == true ) : ?>
-										<a class="hkb-category__viewall" href="<?php echo esc_attr(get_term_link($tax_term, 'ht_kb_category')) ?>"><?php _e( 'View all →', 'knowall' ); ?></a>
+										<a class="hkb-category__viewall" href="<?php echo esc_attr(get_term_link($tax_term, 'ht_kb_category')) ?>"><?php _e( "View all {$totalArticles}", 'knowall' ); ?></a>
 									<?php endif; ?>
 								   
 								<?php endif; ?>
@@ -80,9 +76,6 @@
 
 						</div>
 
-					<?php if ( get_theme_mod( 'ht_setting__kbarchivecatarticles', '0' ) != true ) : ?> 
-						</a>
-					<?php endif; ?>
 					</div>                 
 
 				</li>
