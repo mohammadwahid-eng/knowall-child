@@ -62,3 +62,7 @@ body {
 .site-header .site-header__title {
     text-align: start;
 }
+
+.site-header .site-header__search {
+    padding: 20px 0 60px 0;
+}
